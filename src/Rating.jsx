@@ -22,11 +22,12 @@ class Rating extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
+    const dirty = this.props.value !== nextProps.value && !this.state.dirty
+      ? true
+      : this.state.dirty;
     this.setState({
-      dirty: this.props.value !== nextProps.value && !this.state.dirty
-        ? true
-        : this.state.dirty,
-      displayValue: nextProps.value
+      dirty,
+      displayValue: dirty ? nextProps.value : this.state.displayValue
     });
   }
 
