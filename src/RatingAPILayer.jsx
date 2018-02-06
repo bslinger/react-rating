@@ -52,7 +52,7 @@ class RatingAPILayer extends React.PureComponent {
       : translatedValue;
   }
 
-  tranlateValueToDisplayValue(value) {
+  translateValueToDisplayValue(value) {
     if (value === undefined) {
       return 0;
     }
@@ -80,8 +80,8 @@ class RatingAPILayer extends React.PureComponent {
     return (
       <Rating
         totalSymbols={calculateTotalSymbols(start, stop, step)}
-        value={this.tranlateValueToDisplayValue(this.state.value)}
-        placeholderValue={this.tranlateValueToDisplayValue(this.props.placeholderRating)}
+        value={this.translateValueToDisplayValue(this.state.value)}
+        placeholderValue={this.translateValueToDisplayValue(this.props.placeholderRating)}
         readonly={readonly}
         quiet={quiet}
         fractions={fractions}
