@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Return the corresponding React node for an icon.
-const _iconNode = (icon) => {
+const _iconNode = (icon, extraProps = {}) => {
   // If it is already a React Element just return it.
   if (React.isValidElement(icon)) {
-    return icon;
+    return React.cloneElement(icon, extraProps);
   }
   // If it is an object, try to use it as a CSS style object.
   if (typeof icon === 'object' && icon !== null) {
@@ -27,10 +27,11 @@ class RatingSymbol extends React.PureComponent {
       direction,
       readonly,
       onClick,
-      onMouseMove
+      onMouseMove,
+      displayValue
     } = this.props;
     const backgroundNode = _iconNode(inactiveIcon);
-    const iconNode = _iconNode(activeIcon);
+    const iconNode = _iconNode(activeIcon, {displayValue});
     const iconContainerStyle = {
       display: 'inline-block',
       position: 'absolute',
@@ -93,7 +94,8 @@ RatingSymbol.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   onClick: PropTypes.func,
   onMouseMove: PropTypes.func,
   onTouchMove: PropTypes.func,
-  onTouchEnd: PropTypes.func
+  onTouchEnd: PropTypes.func,
+  displayValue: PropTypes.number
 };
 
 export default RatingSymbol;

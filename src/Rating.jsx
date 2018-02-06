@@ -157,6 +157,7 @@ class Rating extends React.PureComponent {
           onTouchMove={!readonly ? this.symbolMouseMove : noop}
           onTouchEnd={!readonly ? this.symbolClick : noop}
           direction={direction}
+          displayValue={displayValue}
         />
       );
     }
