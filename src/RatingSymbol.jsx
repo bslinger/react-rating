@@ -27,10 +27,12 @@ class RatingSymbol extends React.PureComponent {
       direction,
       readonly,
       onClick,
-      onMouseMove
+      onMouseMove,
+      displayValue,
+      passDisplayValue
     } = this.props;
     const backgroundNode = _iconNode(inactiveIcon);
-    const iconNode = _iconNode(activeIcon);
+    const iconNode = _iconNode(activeIcon, passDisplayValue && {displayValue});
     const iconContainerStyle = {
       display: 'inline-block',
       position: 'absolute',
