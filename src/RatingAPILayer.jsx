@@ -70,7 +70,8 @@ class RatingAPILayer extends React.PureComponent {
       fractions,
       direction,
       start,
-      stop
+      stop,
+      passDisplayValue
     } = this.props;
 
     function calculateTotalSymbols(start, stop, step) {
@@ -91,6 +92,7 @@ class RatingAPILayer extends React.PureComponent {
         placeholderSymbol={placeholderSymbol}
         onClick={this.handleClick}
         onHover={this.handleHover}
+        passDisplayValue={passDisplayValue}
       />
     );
   }
@@ -108,46 +110,48 @@ RatingAPILayer.defaultProps = {
   onHover: noop,
   emptySymbol: Style.empty,
   fullSymbol: Style.full,
-  placeholderSymbol: Style.placeholder
+  placeholderSymbol: Style.placeholder,
+  passDisplayValue: false
 };
 
 // Define propTypes only in development.
 RatingAPILayer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
-  start: PropTypes.number,
-  stop: PropTypes.number,
-  step: PropTypes.number,
-  initialRating: PropTypes.number,
-  placeholderRating: PropTypes.number,
-  readonly: PropTypes.bool,
-  quiet: PropTypes.bool,
-  fractions: PropTypes.number,
-  direction: PropTypes.string,
-  emptySymbol: PropTypes.oneOfType([
-    // Array of class names and/or style objects.
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
-    // Class names.
-    PropTypes.string,
-    // Style objects.
-    PropTypes.object
-  ]),
-  fullSymbol: PropTypes.oneOfType([
-    // Array of class names and/or style objects.
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
-    // Class names.
-    PropTypes.string,
-    // Style objects.
-    PropTypes.object
-  ]),
-  placeholderSymbol: PropTypes.oneOfType([
-    // Array of class names and/or style objects.
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
-    // Class names.
-    PropTypes.string,
-    // Style objects.
-    PropTypes.object
-  ]),
-  onHover: PropTypes.func,
-  onChange: PropTypes.func
-};
+    start: PropTypes.number,
+    stop: PropTypes.number,
+    step: PropTypes.number,
+    initialRating: PropTypes.number,
+    placeholderRating: PropTypes.number,
+    readonly: PropTypes.bool,
+    quiet: PropTypes.bool,
+    fractions: PropTypes.number,
+    direction: PropTypes.string,
+    emptySymbol: PropTypes.oneOfType([
+      // Array of class names and/or style objects.
+      PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
+      // Class names.
+      PropTypes.string,
+      // Style objects.
+      PropTypes.object
+    ]),
+    fullSymbol: PropTypes.oneOfType([
+      // Array of class names and/or style objects.
+      PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
+      // Class names.
+      PropTypes.string,
+      // Style objects.
+      PropTypes.object
+    ]),
+    placeholderSymbol: PropTypes.oneOfType([
+      // Array of class names and/or style objects.
+      PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
+      // Class names.
+      PropTypes.string,
+      // Style objects.
+      PropTypes.object
+    ]),
+    onHover: PropTypes.func,
+    onChange: PropTypes.func,
+    passDisplayValue: PropTypes.bool
+  };
 
 export default RatingAPILayer;

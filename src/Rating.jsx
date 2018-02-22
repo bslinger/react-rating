@@ -102,7 +102,8 @@ class Rating extends React.PureComponent {
       direction,
       emptySymbol,
       fullSymbol,
-      placeholderSymbol
+      placeholderSymbol,
+      passDisplayValue
     } = this.props;
     const { displayValue, interacting } = this.state;
     const symbolNodes = [];
@@ -151,6 +152,7 @@ class Rating extends React.PureComponent {
           onTouchMove={!readonly ? this.symbolMouseMove : noop}
           onTouchEnd={!readonly ? this.symbolClick : noop}
           direction={direction}
+          passDisplayValue={passDisplayValue}
         />
       );
     }
