@@ -22,12 +22,10 @@ class Rating extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    const dirty = this.props.value !== nextProps.value && !this.state.dirty
-      ? true
-      : this.state.dirty;
+    const valueChanged = this.props.value !== nextProps.value;
     this.setState({
-      dirty,
-      displayValue: dirty ? nextProps.value : this.state.displayValue
+      dirty: valueChanged || this.state.dirty,
+      displayValue: valueChanged ? nextProps.value : this.state.displayValue
     });
   }
 
@@ -39,7 +37,13 @@ class Rating extends React.PureComponent {
   }
 
   symbolClick(symbolIndex, event) {
-    this.props.onClick(this.state.displayValue, event);
+    const value = this.calculateDisplayValue(symbolIndex, event);
+    if (value !== this.state.displayValue) {
+      this.setState({
+        displayValue: value
+      });
+    }
+    this.props.onClick(value, event);
   }
 
   symbolMouseMove(symbolIndex, event) {
@@ -153,6 +157,7 @@ class Rating extends React.PureComponent {
           onTouchEnd={!readonly ? this.symbolClick : noop}
           direction={direction}
           passDisplayValue={passDisplayValue}
+          displayValue={displayValue}
         />
       );
     }
@@ -184,7 +189,9 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     // Class names.
     PropTypes.string,
     // Style objects.
-    PropTypes.object
+    PropTypes.object,
+    // React element
+    PropTypes.element
   ]).isRequired,
   fullSymbol: PropTypes.oneOfType([
     // Array of class names and/or style objects.
@@ -192,7 +199,9 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     // Class names.
     PropTypes.string,
     // Style objects.
-    PropTypes.object
+    PropTypes.object,
+    // React element
+    PropTypes.element
   ]).isRequired,
   placeholderSymbol: PropTypes.oneOfType([
     // Array of class names and/or style objects.
@@ -200,7 +209,9 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     // Class names.
     PropTypes.string,
     // Style objects.
-    PropTypes.object
+    PropTypes.object,
+    // React element
+    PropTypes.element
   ]),
   onClick: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired
