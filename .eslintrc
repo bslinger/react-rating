@@ -20,7 +20,7 @@
     "__DEV__": true
   },
   "rules": {
-    "indent": ["error", 2],
+    "indent": ["warn", 4],
     "func-names": ["error", "never"],
     "comma-dangle": ["error", "never"],
     "linebreak-style": "off",
